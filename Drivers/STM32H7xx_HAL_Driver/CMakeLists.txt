@@ -2,7 +2,7 @@
 # create shared lib first that has all sources that are used across all builds:boot, qspi, app
 
 
-if(P32_BOOTCODE ON)
+if(P32_BOOTCODE)
     add_library(
         STM32H7xx_HAL_bootcode
         SHARED
@@ -27,12 +27,19 @@ if(P32_BOOTCODE ON)
     
     target_include_directories(
         STM32H7xx_HAL_bootcode
+        PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    )
+
+    target_link_libraries(
+        STM32H7xx_HAL_bootcode
+        PUBLIC
+        hw_p32_bootcode
     )
 endif()
 
 #libraries for qspi
-if(QSPI_EXTLOADER ON)
+if(QSPI_EXTLOADER)
     add_library(
         STM32H7xx_HAL_qspi_loader
         SHARED
@@ -56,5 +63,5 @@ if(QSPI_EXTLOADER ON)
 endif()
 
 #libraries for sc50-appcode
-if(SC50_MMC_APPCODE ON)
+if(SC50_MMC_APPCODE)
 endif()
