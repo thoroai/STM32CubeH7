@@ -33,6 +33,26 @@ endif()
 
 #libraries for qspi
 if(QSPI_EXTLOADER ON)
+    add_library(
+        STM32H7xx_HAL_qspi_loader
+        SHARED
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_cortex.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_gpio.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_pwr.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_pwr_ex.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_qspi.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc_ex.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim_ex.c
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_mdma.c
+    )
+
+    target_include_directories(
+        STM32H7xx_HAL_bootcode
+        ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+    )
 endif()
 
 #libraries for sc50-appcode
