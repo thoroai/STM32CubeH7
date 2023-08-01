@@ -29,15 +29,39 @@ if(P32_BOOTCODE)
         STM32H7xx_HAL_bootcode
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+        ${CMAKE_SOURCE_DIR}/src/config/hw/p32_bootcode  
+        ${CMAKE_SOURCE_DIR}lib/customization/stm32_customizations
     )
 
     target_link_libraries(
         STM32H7xx_HAL_bootcode
         PUBLIC
-        hw_p32_bootcode
+        CMSIS_bootcode
+        hal_conf_bootcode
     )
+
+    ######################################
+    # Compiler Options
+    ######################################
+    set(COMPILE_OPTS 
+    -mcpu=cortex-m7
+    -mthumb
+    -mfpu=fpv5-d16
+    -mfloat-abi=softfp
+    -fdata-sections
+    -ffunction-sections
+    -Wall
+    -MMD
+    -MP
+    -w
+    $<$<CONFIG:Debug>:-Og>)
+
+    target_compile_definitions(STM32H7xx_HAL_bootcode PUBLIC -DSTM32H750xx)
+    target_compile_options(STM32H7xx_HAL_bootcode PUBLIC ${COMPILE_OPTS})
 endif()
 
+
+############################################## QSPI ########################################################
 #libraries for qspi
 if(QSPI_EXTLOADER)
     add_library(
