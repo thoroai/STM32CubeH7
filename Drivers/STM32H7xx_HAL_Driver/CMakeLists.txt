@@ -1,5 +1,5 @@
 
-# create shared lib first that has all sources that are used across all builds:boot, qspi, app
+
 
 
 if(P32_BOOTCODE)
@@ -23,6 +23,8 @@ if(P32_BOOTCODE)
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim_ex.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_hash.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_hash_ex.c
+
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_mdma.c #might not need this?
     )
     
     target_include_directories(
@@ -38,11 +40,9 @@ if(P32_BOOTCODE)
         PUBLIC
         CMSIS_bootcode
         hal_conf_bootcode
+        stm32_customizations_bootcode
     )
 
-    ######################################
-    # Compiler Options
-    ######################################
     set(COMPILE_OPTS 
     -mcpu=cortex-m7
     -mthumb
@@ -65,8 +65,7 @@ endif()
 #libraries for qspi
 if(QSPI_EXTLOADER)
     add_library(
-        STM32H7xx_HAL_qspi_loader
-        SHARED
+        STM32H7xx_HAL_extloader
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal.c
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_cortex.c
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_gpio.c
@@ -81,11 +80,13 @@ if(QSPI_EXTLOADER)
     )
 
     target_include_directories(
-        STM32H7xx_HAL_bootcode
+        STM32H7xx_HAL_extloader
+        PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Inc
+        ${CMAKE_SOURCE_DIR}/src/config/hw/extloader
     )
-endif()
 
-#libraries for sc50-appcode
-if(SC50_MMC_APPCODE)
+    target_link_libraries(STM32H7xx_HAL_extloader 
+    PUBLIC
+    hw_extloader)
 endif()
