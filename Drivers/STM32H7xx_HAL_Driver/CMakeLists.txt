@@ -5,7 +5,6 @@
 if(P32_BOOTCODE)
     add_library(
         STM32H7xx_HAL_bootcode
-        SHARED
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc_ex.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_ll_rcc.c 
@@ -64,6 +63,7 @@ endif()
 ############################################## QSPI ########################################################
 #libraries for qspi
 if(QSPI_EXTLOADER)
+    message("BUILDING HAL FOR QSPI")
     add_library(
         STM32H7xx_HAL_extloader
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal.c
@@ -84,9 +84,31 @@ if(QSPI_EXTLOADER)
         PUBLIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Inc
         ${CMAKE_SOURCE_DIR}/src/config/hw/extloader
+        ${CMAKE_SOURCE_DIR}/lib/stm32_cube_h7/Drivers/CMSIS/Device/ST/STM32H7xx/Include
+        ${CMAKE_SOURCE_DIR}/lib/stm32_cube_h7/Drivers/CMSIS/Include
     )
 
-    target_link_libraries(STM32H7xx_HAL_extloader 
-    PUBLIC
-    hw_extloader)
+    target_link_libraries(
+        STM32H7xx_HAL_extloader 
+        PUBLIC
+        hw_extloader
+        stm_customizations_extloader
+        )
+    
+    set(COMPILE_OPTS 
+        -mcpu=cortex-m7
+        -mthumb
+        -mfpu=fpv5-d16
+        -mfloat-abi=softfp
+        -fdata-sections
+        -ffunction-sections
+        -Wall
+        -MMD
+        -MP
+        -w
+        $<$<CONFIG:Debug>:-Og>
+        )
+
+    target_compile_definitions(STM32H7xx_HAL_extloader PUBLIC -DSTM32H750xx)
+    target_compile_options(STM32H7xx_HAL_extloader PUBLIC ${COMPILE_OPTS})
 endif()

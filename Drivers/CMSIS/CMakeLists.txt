@@ -11,12 +11,11 @@ if(P32_BOOTCODE)
         ${CMAKE_CURRENT_SOURCE_DIR}/Include
         ${CMAKE_CURRENT_SOURCE_DIR}/Device/ST/STM32H7xx/Include
     )
+
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RTOS2)
 endif()
 
 if(QSPI_EXTLOADER)
     # add Include dirs to target includes
-    include_directories(
-    
-    ${CMAKE_CURRENT_SOURCE_DIR}Include
-    )
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RTOS2)
 endif()
