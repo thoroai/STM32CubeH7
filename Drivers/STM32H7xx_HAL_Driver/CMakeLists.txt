@@ -121,6 +121,12 @@ if(SC50_MMC)
     set(HAL_APP_SOURCES)
     set(STM32_HAL  stm32h7xx_hal)
 
+
+    list(APPEND HAL_APP_SOURCES
+        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_hcd.c
+    )
+
+
     if(${USING_ADC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
             ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_adc.c
