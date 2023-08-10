@@ -1,4 +1,3 @@
-message("FATFS DIR")
 
 if(SC50_MMC)
     if(${USING_FATFS} EQUAL 1)

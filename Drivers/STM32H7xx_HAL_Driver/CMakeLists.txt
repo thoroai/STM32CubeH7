@@ -22,7 +22,6 @@ if(P32_BOOTCODE)
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim_ex.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_hash.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_hash_ex.c
-
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_mdma.c #might not need this?
     )
     
@@ -43,17 +42,18 @@ if(P32_BOOTCODE)
     )
 
     set(COMPILE_OPTS 
-    -mcpu=cortex-m7
-    -mthumb
-    -mfpu=fpv5-d16
-    -mfloat-abi=softfp
-    -fdata-sections
-    -ffunction-sections
-    -Wall
-    -MMD
-    -MP
-    -w
-    $<$<CONFIG:Debug>:-Og>)
+        -mcpu=cortex-m7
+        -mthumb
+        -mfpu=fpv5-d16
+        -mfloat-abi=softfp
+        -fdata-sections
+        -ffunction-sections
+        -Wall
+        -MMD
+        -MP
+        -w
+        $<$<CONFIG:Debug>:-Og>
+    )
 
     target_compile_definitions(STM32H7xx_HAL_bootcode PUBLIC -DSTM32H750xx)
     target_compile_options(STM32H7xx_HAL_bootcode PUBLIC ${COMPILE_OPTS})
@@ -64,7 +64,6 @@ endif()
 ######### QSPI_EXTLOADER
 ##################################
 if(QSPI_EXTLOADER)
-    message("BUILDING HAL FOR QSPI")
     add_library(
         STM32H7xx_HAL_extloader
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal.c
@@ -94,7 +93,7 @@ if(QSPI_EXTLOADER)
         PUBLIC
         hw_extloader
         stm_customizations_extloader
-        )
+    )
     
     set(COMPILE_OPTS 
         -mcpu=cortex-m7
@@ -108,7 +107,7 @@ if(QSPI_EXTLOADER)
         -MP
         -w
         $<$<CONFIG:Debug>:-Og>
-        )
+    )
 
     target_compile_definitions(STM32H7xx_HAL_extloader PUBLIC -DSTM32H750xx)
     target_compile_options(STM32H7xx_HAL_extloader PUBLIC ${COMPILE_OPTS})
@@ -121,11 +120,9 @@ if(SC50_MMC)
     set(HAL_APP_SOURCES)
     set(STM32_HAL  stm32h7xx_hal)
 
-
     list(APPEND HAL_APP_SOURCES
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_hcd.c
     )
-
 
     if(${USING_ADC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
@@ -249,26 +246,17 @@ if(SC50_MMC)
     target_link_libraries(
         STM32H7xx_HAL_appcode 
         PUBLIC
-        )
-
-    
-    set(COMPILE_DEFS
-        -DSTM32H7
-        -DUSE_HAL_DRIVER
-        -DSTM32H750xx
-        -DEVENT_TRACE=${EVENT_TRACE_OPTION}
-        "-D__FILENAME__=\"$(notdir $<)\""
-        # ${C_DEFS}
+        cross_service_appcode
         )
 
     target_compile_definitions(
         STM32H7xx_HAL_appcode
         PUBLIC
-        ${COMPILE_DEFS}
+        ${C_DEFS}
     )
 
     set(COMPILE_OPTS
-        ${COMPILE_DEFS}
+        ${C_DEFS}
         # ${C_INCLUDES}
         -mcpu=cortex-m7
         -mthumb
@@ -287,11 +275,12 @@ if(SC50_MMC)
         $<$<CONFIG:Debug>:-Og>
         # -Wa,-a,-ad
         -O0
-        )
+    )
+
     target_compile_options(
         STM32H7xx_HAL_appcode
         PUBLIC
         ${COMPILE_OPTS}
-        )
+    )
 
 endif()
