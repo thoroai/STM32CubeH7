@@ -5,6 +5,7 @@
 if(P32_BOOTCODE)
     add_library(
         STM32H7xx_HAL_bootcode
+        STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc_ex.c 
         ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_ll_rcc.c 
@@ -31,6 +32,8 @@ if(P32_BOOTCODE)
         ${CMAKE_CURRENT_SOURCE_DIR}/Inc
         ${CMAKE_SOURCE_DIR}/src/config/hw/p32_bootcode  
         ${CMAKE_SOURCE_DIR}lib/customization/stm32_customizations
+        ${CMAKE_SOURCE_DIR}/lib/customization/stm32_customizations/bootcode_conf
+        ${CMAKE_SOURCE_DIR}/lib/customization/stm32_customizations/p32
     )
 
     target_link_libraries(
@@ -39,6 +42,7 @@ if(P32_BOOTCODE)
         CMSIS_bootcode
         hal_conf_bootcode
         stm32_customizations_bootcode
+        # stm32_customizations_p32
     )
 
     set(COMPILE_OPTS 
@@ -55,8 +59,22 @@ if(P32_BOOTCODE)
         $<$<CONFIG:Debug>:-Og>
     )
 
-    target_compile_definitions(STM32H7xx_HAL_bootcode PUBLIC -DSTM32H750xx)
-    target_compile_options(STM32H7xx_HAL_bootcode PUBLIC ${COMPILE_OPTS})
+    target_compile_definitions(
+        STM32H7xx_HAL_bootcode 
+        PUBLIC 
+        -DSTM32H750xx
+    )
+
+    target_compile_options(
+        STM32H7xx_HAL_bootcode 
+        PUBLIC 
+        ${COMPILE_OPTS}
+    )
+    target_link_options(
+        STM32H7xx_HAL_bootcode
+        PUBLIC
+        ${LINK_OPTS}
+    )
 endif()
 
 
@@ -109,8 +127,17 @@ if(QSPI_EXTLOADER)
         $<$<CONFIG:Debug>:-Og>
     )
 
-    target_compile_definitions(STM32H7xx_HAL_extloader PUBLIC -DSTM32H750xx)
-    target_compile_options(STM32H7xx_HAL_extloader PUBLIC ${COMPILE_OPTS})
+    target_compile_definitions(
+        STM32H7xx_HAL_extloader 
+        PUBLIC 
+        -DSTM32H750xx
+    )
+
+    target_compile_options(
+        STM32H7xx_HAL_extloader 
+        PUBLIC 
+        ${COMPILE_OPTS}
+    )
 endif()
 
 ##################################
@@ -247,7 +274,7 @@ if(SC50_MMC)
         STM32H7xx_HAL_appcode 
         PUBLIC
         cross_service_appcode
-        )
+    )
 
     target_compile_definitions(
         STM32H7xx_HAL_appcode

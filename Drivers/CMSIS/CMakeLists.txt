@@ -11,7 +11,11 @@ if(P32_BOOTCODE)
         ${CMAKE_CURRENT_SOURCE_DIR}/Include
         ${CMAKE_CURRENT_SOURCE_DIR}/Device/ST/STM32H7xx/Include
     )
-
+    target_link_options(
+        CMSIS_bootcode
+        INTERFACE
+        ${LINK_OPTS}
+    )
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RTOS2)
 endif()
 
