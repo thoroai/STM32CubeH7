@@ -1,6 +1,5 @@
  # add qspi CMSIS includes here
 if(P32_BOOTCODE)
-
     add_library(
         CMSIS_bootcode
         INTERFACE
@@ -16,14 +15,13 @@ if(P32_BOOTCODE)
         INTERFACE
         ${LINK_OPTS}
     )
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RTOS2)
+    add_subdirectory(RTOS2)
 endif()
 
 if(QSPI_EXTLOADER)
-    # add Include dirs to target includes
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RTOS2)
+    add_subdirectory(RTOS2)
 endif()
 
 if(SC50_MMC)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/RTOS2)
+    add_subdirectory(RTOS2)
 endif()

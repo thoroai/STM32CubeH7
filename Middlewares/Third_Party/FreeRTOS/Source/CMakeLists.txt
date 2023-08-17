@@ -3,7 +3,7 @@ if(${USING_RTOS} EQUAL 1)
     add_library(
         freeRTOS_Source_appcode
         STATIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/
+        # ${CMAKE_CURRENT_SOURCE_DIR}/
         croutine.c
         event_groups.c
         list.c

@@ -146,116 +146,115 @@ endif()
 ##################################
 if(SC50_MMC)
     set(HAL_APP_SOURCES)
-    set(STM32_HAL  stm32h7xx_hal)
 
     list(APPEND HAL_APP_SOURCES
-        Src/${STM32_HAL}_hcd.c
+        Src/stm32h7xx_hal_hcd.c
     )
 
     if(${USING_ADC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_adc.c
-            Src/${STM32_HAL}_adc_ex.c)
+            Src/stm32h7xx_hal_adc.c
+            Src/stm32h7xx_hal_adc_ex.c)
     endif()
 
     if(${USING_CRC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_crc.c
-            Src/${STM32_HAL}_crc_ex.c)
+            Src/stm32h7xx_hal_crc.c
+            Src/stm32h7xx_hal_crc_ex.c)
     endif()
 
     if(${USING_DAC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_dac.c
-            Src/${STM32_HAL}_dac_ex.c)
+            Src/stm32h7xx_hal_dac.c
+            Src/stm32h7xx_hal_dac_ex.c)
     endif()
 
     list(APPEND HAL_APP_SOURCES
-        Src/${STM32_HAL}_rcc.c
-        Src/${STM32_HAL}_rcc_ex.c
+        Src/stm32h7xx_hal_rcc.c
+        Src/stm32h7xx_hal_rcc_ex.c
         Src/stm32h7xx_ll_rcc.c
-        Src/${STM32_HAL}_gpio.c
-        Src/${STM32_HAL}_dma.c
-        Src/${STM32_HAL}_dma_ex.c
-        Src/${STM32_HAL}_pwr.c
-        Src/${STM32_HAL}_pwr_ex.c
-        Src/${STM32_HAL}_cortex.c
-        Src/${STM32_HAL}.c
-        Src/${STM32_HAL}_i2c.c
-        Src/${STM32_HAL}_i2c_ex.c
-        Src/${STM32_HAL}_exti.c
-        Src/${STM32_HAL}_iwdg.c)
+        Src/stm32h7xx_hal_gpio.c
+        Src/stm32h7xx_hal_dma.c
+        Src/stm32h7xx_hal_dma_ex.c
+        Src/stm32h7xx_hal_pwr.c
+        Src/stm32h7xx_hal_pwr_ex.c
+        Src/stm32h7xx_hal_cortex.c
+        Src/stm32h7xx_hal.c
+        Src/stm32h7xx_hal_i2c.c
+        Src/stm32h7xx_hal_i2c_ex.c
+        Src/stm32h7xx_hal_exti.c
+        Src/stm32h7xx_hal_iwdg.c)
 
     if(${USING_DISPLAY} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_ltdc.c)
+            Src/stm32h7xx_hal_ltdc.c)
     endif()
 
     if(${USING_TOUCHGFX} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_dma2d.c)
+            Src/stm32h7xx_hal_dma2d.c)
     endif()
 
     if(${USING_CAN} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_fdcan.c)
+            Src/stm32h7xx_hal_fdcan.c)
     endif()
 
     if(${USING_QSPI} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_qspi.c)
+            Src/stm32h7xx_hal_qspi.c)
     endif()
 
     if(${USING_FLASH} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_flash.c
-            Src/${STM32_HAL}_flash_ex.c)
+            Src/stm32h7xx_hal_flash.c
+            Src/stm32h7xx_hal_flash_ex.c)
     endif()
 
     if(${USING_FMC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
             Src/${STM32_LL}_fmc.c
-            Src/${STM32_HAL}_sdram.c)
+            Src/stm32h7xx_hal_sdram.c)
     endif()
 
     list(APPEND HAL_APP_SOURCES
-        Src/${STM32_HAL}_rtc.c
-        Src/${STM32_HAL}_rtc_ex.c
-        Src/${STM32_HAL}_spi.c
-        Src/${STM32_HAL}_spi_ex.c
-        Src/${STM32_HAL}_tim.c
-        Src/${STM32_HAL}_tim_ex.c)
+        Src/stm32h7xx_hal_rtc.c
+        Src/stm32h7xx_hal_rtc_ex.c
+        Src/stm32h7xx_hal_spi.c
+        Src/stm32h7xx_hal_spi_ex.c
+        Src/stm32h7xx_hal_tim.c
+        Src/stm32h7xx_hal_tim_ex.c)
 
     if(${USING_UART} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_uart.c
-            Src/${STM32_HAL}_uart_ex.c
+            Src/stm32h7xx_hal_uart.c
+            Src/stm32h7xx_hal_uart_ex.c
             Src/stm32h7xx_ll_usart.c
             )
     endif()
 
     if(${USING_HASH} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_hash.c
-            Src/${STM32_HAL}_hash_ex.c)
+            Src/stm32h7xx_hal_hash.c
+            Src/stm32h7xx_hal_hash_ex.c)
     endif()
 
     if(${USING_EMMC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_sdmmc.c
-            Src/${STM32_HAL}_mmc.c
-            Src/${STM32_HAL}_mmc_ex.c)
+            Src/stm32h7xx_hal_sdmmc.c
+            Src/stm32h7xx_hal_mmc.c
+            Src/stm32h7xx_hal_mmc_ex.c)
     endif()
 
     if(${USING_USB} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_usb.c
+            Src/stm32h7xx_hal_usb.c
             )
     endif()
 
     if(${USING_LWIP} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            Src/${STM32_HAL}_eth.c)
+            Src/stm32h7xx_hal_eth.c)
     endif()
 
     add_library(
