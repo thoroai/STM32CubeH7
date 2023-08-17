@@ -2,17 +2,18 @@ if(${USING_RTOS} EQUAL 1)
     set(ARM_CM     ARM_CM4F)
     add_library(
         freeRTOS_Source_appcode
+        STATIC
         ${CMAKE_CURRENT_SOURCE_DIR}/
-        ${CMAKE_CURRENT_SOURCE_DIR}/croutine.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/event_groups.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/list.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/queue.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/stream_buffer.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/tasks.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/timers.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/portable/MemMang/heap_4.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/portable/GCC/${ARM_CM}/port.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/CMSIS_RTOS_V2/cmsis_os2.c
+        croutine.c
+        event_groups.c
+        list.c
+        queue.c
+        stream_buffer.c
+        tasks.c
+        timers.c
+        portable/MemMang/heap_4.c
+        portable/GCC/${ARM_CM}/port.c
+        CMSIS_RTOS_V2/cmsis_os2.c
     )
 
     target_include_directories(

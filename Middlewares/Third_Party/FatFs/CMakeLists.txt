@@ -3,11 +3,18 @@ if(SC50_MMC)
     if(${USING_FATFS} EQUAL 1)
         add_library(
             fatfs_appcode
-            ${CMAKE_CURRENT_SOURCE_DIR}/diskio.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/ff.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/ff_gen_drv.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/option/syscall.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/option/unicode.c
+            OBJECT
+            src/diskio.c
+            src/ff.c
+            src/ff_gen_drv.c
+            src/option/syscall.c
+            src/option/unicode.c
             )
+
+        target_include_directories(
+            fatfs_appcode
+            PUBLIC
+            src
+        )
     endif()
 endif()

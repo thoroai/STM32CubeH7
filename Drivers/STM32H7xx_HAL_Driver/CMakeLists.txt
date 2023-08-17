@@ -6,24 +6,24 @@ if(P32_BOOTCODE)
     add_library(
         STM32H7xx_HAL_bootcode
         STATIC
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc_ex.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_ll_rcc.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_gpio.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_dma.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_dma_ex.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_pwr.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_pwr_ex.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_cortex.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_qspi.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_spi.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_spi_ex.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim_ex.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_hash.c 
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_hash_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_mdma.c #might not need this?
+        Src/stm32h7xx_hal_rcc.c 
+        Src/stm32h7xx_hal_rcc_ex.c 
+        Src/stm32h7xx_ll_rcc.c 
+        Src/stm32h7xx_hal_gpio.c 
+        Src/stm32h7xx_hal_dma.c 
+        Src/stm32h7xx_hal_dma_ex.c 
+        Src/stm32h7xx_hal_pwr.c 
+        Src/stm32h7xx_hal_pwr_ex.c 
+        Src/stm32h7xx_hal_cortex.c 
+        Src/stm32h7xx_hal.c 
+        Src/stm32h7xx_hal_qspi.c 
+        Src/stm32h7xx_hal_spi.c 
+        Src/stm32h7xx_hal_spi_ex.c 
+        Src/stm32h7xx_hal_tim.c 
+        Src/stm32h7xx_hal_tim_ex.c 
+        Src/stm32h7xx_hal_hash.c 
+        Src/stm32h7xx_hal_hash_ex.c
+        Src/stm32h7xx_hal_mdma.c #might not need this?
     )
     
     target_include_directories(
@@ -61,7 +61,7 @@ if(P32_BOOTCODE)
 
     target_compile_definitions(
         STM32H7xx_HAL_bootcode 
-        PUBLIC 
+        PUBLIC
         -DSTM32H750xx
     )
 
@@ -84,17 +84,18 @@ endif()
 if(QSPI_EXTLOADER)
     add_library(
         STM32H7xx_HAL_extloader
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_cortex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_gpio.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_pwr.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_pwr_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_qspi.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_rcc_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_tim_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/stm32h7xx_hal_mdma.c
+        OBJECT
+        Src/stm32h7xx_hal.c
+        Src/stm32h7xx_hal_cortex.c
+        Src/stm32h7xx_hal_gpio.c
+        Src/stm32h7xx_hal_pwr.c
+        Src/stm32h7xx_hal_pwr_ex.c
+        Src/stm32h7xx_hal_qspi.c
+        Src/stm32h7xx_hal_rcc.c
+        Src/stm32h7xx_hal_rcc_ex.c
+        Src/stm32h7xx_hal_tim.c
+        Src/stm32h7xx_hal_tim_ex.c
+        Src/stm32h7xx_hal_mdma.c
     )
 
     target_include_directories(
@@ -148,116 +149,117 @@ if(SC50_MMC)
     set(STM32_HAL  stm32h7xx_hal)
 
     list(APPEND HAL_APP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_hcd.c
+        Src/${STM32_HAL}_hcd.c
     )
 
     if(${USING_ADC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_adc.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_adc_ex.c)
+            Src/${STM32_HAL}_adc.c
+            Src/${STM32_HAL}_adc_ex.c)
     endif()
 
     if(${USING_CRC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_crc.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_crc_ex.c)
+            Src/${STM32_HAL}_crc.c
+            Src/${STM32_HAL}_crc_ex.c)
     endif()
 
     if(${USING_DAC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_dac.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_dac_ex.c)
+            Src/${STM32_HAL}_dac.c
+            Src/${STM32_HAL}_dac_ex.c)
     endif()
 
     list(APPEND HAL_APP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_rcc.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_rcc_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_rcc.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_gpio.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_dma.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_dma_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_pwr.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_pwr_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_cortex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_i2c.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_i2c_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_exti.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_iwdg.c)
+        Src/${STM32_HAL}_rcc.c
+        Src/${STM32_HAL}_rcc_ex.c
+        Src/${STM32_HAL}_rcc.c
+        Src/${STM32_HAL}_gpio.c
+        Src/${STM32_HAL}_dma.c
+        Src/${STM32_HAL}_dma_ex.c
+        Src/${STM32_HAL}_pwr.c
+        Src/${STM32_HAL}_pwr_ex.c
+        Src/${STM32_HAL}_cortex.c
+        Src/${STM32_HAL}.c
+        Src/${STM32_HAL}_i2c.c
+        Src/${STM32_HAL}_i2c_ex.c
+        Src/${STM32_HAL}_exti.c
+        Src/${STM32_HAL}_iwdg.c)
 
     if(${USING_DISPLAY} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_ltdc.c)
+            Src/${STM32_HAL}_ltdc.c)
     endif()
 
     if(${USING_TOUCHGFX} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_dma2d.c)
+            Src/${STM32_HAL}_dma2d.c)
     endif()
 
     if(${USING_CAN} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_fdcan.c)
+            Src/${STM32_HAL}_fdcan.c)
     endif()
 
     if(${USING_QSPI} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_qspi.c)
+            Src/${STM32_HAL}_qspi.c)
     endif()
 
     if(${USING_FLASH} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_flash.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_flash_ex.c)
+            Src/${STM32_HAL}_flash.c
+            Src/${STM32_HAL}_flash_ex.c)
     endif()
 
     if(${USING_FMC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_LL}_fmc.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_sdram.c)
+            Src/${STM32_LL}_fmc.c
+            Src/${STM32_HAL}_sdram.c)
     endif()
 
     list(APPEND HAL_APP_SOURCES
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_rtc.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_rtc_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_spi.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_spi_ex.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_tim.c
-        ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_tim_ex.c)
+        Src/${STM32_HAL}_rtc.c
+        Src/${STM32_HAL}_rtc_ex.c
+        Src/${STM32_HAL}_spi.c
+        Src/${STM32_HAL}_spi_ex.c
+        Src/${STM32_HAL}_tim.c
+        Src/${STM32_HAL}_tim_ex.c)
 
     if(${USING_UART} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_uart.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_uart_ex.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_usart.c)
+            Src/${STM32_HAL}_uart.c
+            Src/${STM32_HAL}_uart_ex.c
+            Src/${STM32_HAL}_usart.c)
     endif()
 
     if(${USING_HASH} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_hash.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_hash_ex.c)
+            Src/${STM32_HAL}_hash.c
+            Src/${STM32_HAL}_hash_ex.c)
     endif()
 
     if(${USING_EMMC} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_sdmmc.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_mmc.c
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_mmc_ex.c)
+            Src/${STM32_HAL}_sdmmc.c
+            Src/${STM32_HAL}_mmc.c
+            Src/${STM32_HAL}_mmc_ex.c)
     endif()
 
     if(${USING_USB} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_usb.c
+            Src/${STM32_HAL}_usb.c
             )
     endif()
 
     if(${USING_LWIP} EQUAL 1)
         list(APPEND HAL_APP_SOURCES
-            ${CMAKE_CURRENT_SOURCE_DIR}/Src/${STM32_HAL}_eth.c)
+            Src/${STM32_HAL}_eth.c)
     endif()
 
     add_library(
         STM32H7xx_HAL_appcode
+        STATIC
         ${HAL_APP_SOURCES}
     )
 
@@ -308,6 +310,13 @@ if(SC50_MMC)
         STM32H7xx_HAL_appcode
         PUBLIC
         ${COMPILE_OPTS}
+    )
+
+    target_link_options(
+        STM32H7xx_HAL_appcode
+        PUBLIC
+        ${SC50_LDFLAGS}
+        # -Map=${CMAKE_SOURCE_DIR}/sc50_appcode.map
     )
 
 endif()
