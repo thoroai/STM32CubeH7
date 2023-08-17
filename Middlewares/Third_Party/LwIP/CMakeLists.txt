@@ -51,8 +51,9 @@ if(${USING_LWIP} EQUAL 1)
             lwip_sources_appcode
             PUBLIC
             src/include
+            # src/include/lwip
             ${CMAKE_SOURCE_DIR}/src/config/ip/sc50_mmc
-            ${CMAKE_SOURCE_DIR}/lib/customization/lwip
+            # ${CMAKE_SOURCE_DIR}/lib/customization/lwip
             ${CMAKE_SOURCE_DIR}/lib/stm32_cube_h7/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2
             ${CMAKE_SOURCE_DIR}/src/config/rtos/p32
         )
@@ -63,5 +64,6 @@ if(${USING_LWIP} EQUAL 1)
             freeRTOS_includes
             cross_service_appcode
             GCC_ARM_CM4F
+            lwip_sources_customized_appcode
         )
 endif()

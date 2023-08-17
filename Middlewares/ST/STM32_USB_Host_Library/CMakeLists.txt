@@ -4,7 +4,7 @@ if(SC50_MMC)
     if(${USING_USB} EQUAL 1)
         add_library(
             stm32_usbhost_appcode
-            OBJECT
+            STATIC
             core/src/usbh_ctlreq.c
             core/src/usbh_ioreq.c
             core/src/usbh_pipes.c

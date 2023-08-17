@@ -84,7 +84,7 @@ endif()
 if(QSPI_EXTLOADER)
     add_library(
         STM32H7xx_HAL_extloader
-        OBJECT
+        STATIC
         Src/stm32h7xx_hal.c
         Src/stm32h7xx_hal_cortex.c
         Src/stm32h7xx_hal_gpio.c
@@ -173,7 +173,7 @@ if(SC50_MMC)
     list(APPEND HAL_APP_SOURCES
         Src/${STM32_HAL}_rcc.c
         Src/${STM32_HAL}_rcc_ex.c
-        Src/${STM32_HAL}_rcc.c
+        Src/stm32h7xx_ll_rcc.c
         Src/${STM32_HAL}_gpio.c
         Src/${STM32_HAL}_dma.c
         Src/${STM32_HAL}_dma_ex.c
@@ -230,7 +230,8 @@ if(SC50_MMC)
         list(APPEND HAL_APP_SOURCES
             Src/${STM32_HAL}_uart.c
             Src/${STM32_HAL}_uart_ex.c
-            Src/${STM32_HAL}_usart.c)
+            Src/stm32h7xx_ll_usart.c
+            )
     endif()
 
     if(${USING_HASH} EQUAL 1)
@@ -276,6 +277,7 @@ if(SC50_MMC)
         STM32H7xx_HAL_appcode 
         PUBLIC
         cross_service_appcode
+        p32_customized_appcode
     )
 
     target_compile_definitions(
