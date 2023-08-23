@@ -23,7 +23,6 @@ if(P32_BOOTCODE)
         Src/stm32h7xx_hal_tim_ex.c 
         Src/stm32h7xx_hal_hash.c 
         Src/stm32h7xx_hal_hash_ex.c
-        Src/stm32h7xx_hal_mdma.c #might not need this?
     )
     
     target_include_directories(
@@ -42,27 +41,12 @@ if(P32_BOOTCODE)
         CMSIS_bootcode
         hal_conf_bootcode
         stm32_customizations_bootcode
-        # stm32_customizations_p32
-    )
-
-    set(COMPILE_OPTS 
-        -mcpu=cortex-m7
-        -mthumb
-        -mfpu=fpv5-d16
-        -mfloat-abi=softfp
-        -fdata-sections
-        -ffunction-sections
-        -Wall
-        -MMD
-        -MP
-        -w
-        $<$<CONFIG:Debug>:-Og>
     )
 
     target_compile_definitions(
         STM32H7xx_HAL_bootcode 
         PUBLIC
-        -DSTM32H750xx
+        ${C_DEFS}
     )
 
     target_compile_options(
@@ -70,6 +54,7 @@ if(P32_BOOTCODE)
         PUBLIC 
         ${COMPILE_OPTS}
     )
+    
     target_link_options(
         STM32H7xx_HAL_bootcode
         PUBLIC
